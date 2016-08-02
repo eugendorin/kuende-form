@@ -1,5 +1,6 @@
 require 'backbone.stickit'
 require 'backbone-validation'
+require './styles/sign_up.styl'
 
 Backbone.Validation.configure
   forceUpdate: true
@@ -9,26 +10,15 @@ _.extend Backbone.Validation.callbacks,
     $el = view.$('[name=' + attr + ']')
 
     $el.removeClass('validate invalid')
-    view.$('.help-block2').html('').addClass('hidden')
-
-    # $group = $el.closest('.form-group')
-
-    # $el.removeClass('validate invalid')
-    # $group.find('.help-block').html('').addClass('hidden')
-
+    view.$('.help-block').html('').addClass('hidden')
 
   invalid: (view, attr, error, selector) ->
     $el = view.$('[name=' + attr + ']')
 
-    if view.$('.help-block2').html() is ''
-      view.$('.help-block2').html(error).removeClass('hidden')
-
+    if view.$('.help-block').html() is ''
+      view.$('.help-block').html(error).removeClass('hidden')
+      view.$('.help-block').html(error).addClass('help-block-color')
     $el.addClass('validate invalid')
-
-    # $group = $el.closest('.form-group')
-
-    # $el.addClass('validate invalid')
-    # $group.find('.help-block').html(error).removeClass('hidden')
 
 # Create the Application
 app = new Marionette.Application

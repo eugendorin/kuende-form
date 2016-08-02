@@ -1,3 +1,4 @@
+
 module.exports = Marionette.ItemView.extend
   template: require '../templates/sign_up.hbs'
 
@@ -6,6 +7,7 @@ module.exports = Marionette.ItemView.extend
 
   events:
     'submit':'eventActionSubmit'
+    # 'click @ui.input':'eventClickInput'
 
   bindings:
     '[name=id]':

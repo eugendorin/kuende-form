@@ -19,7 +19,13 @@ module.exports = {
         test: /\.css$/,
         loader: "style-loader!css-loader"
       },
-      { test: /\.hbs$/, loader: "handlebars-loader" }
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader'
+      },
+      { test: /\.hbs$/,
+        loader: "handlebars-loader"
+      }
     ]
   },
   plugins: [
