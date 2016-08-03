@@ -5,10 +5,7 @@ module.exports = Backbone.Model.extend
     password: null
     confirm_password: null
   validation:
-    id:
-      required: true
-      msg: 'Invalid email'
-      pattern: 'email'
+    id: 'validateEmailOrPhone'
     confirm_id:
       required: true
       msg: 'Email must match. Please check again!'
@@ -21,3 +18,11 @@ module.exports = Backbone.Model.extend
       required: true
       msg: 'Password must match. Please check again!'
       equalTo: 'password'
+
+  validateEmailOrPhone: (value, attr, computedState)->
+    if value?.search('@') > -1
+      unless Backbone.Validation.patterns.email.test value
+        return 'Please enter a valid email address'
+    else
+      unless Backbone.Validation.patterns.digits.test value
+        return 'Please enter a valid phone number'

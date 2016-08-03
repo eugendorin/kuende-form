@@ -7,7 +7,7 @@ module.exports = Marionette.ItemView.extend
 
   events:
     'submit':'eventActionSubmit'
-    # 'click @ui.input':'eventClickInput'
+    'blur @ui.input':'eventFocusInputLoss'
 
   bindings:
     '[name=id]':
@@ -39,3 +39,6 @@ module.exports = Marionette.ItemView.extend
     @model.validate()
     @trigger 'handle:submit:signup'
     return false
+
+  eventFocusInputLoss: (ev)->
+    @trigger 'handle:focus:loss:input', $(ev.target).attr 'name'

@@ -31,12 +31,25 @@ module.exports = Marionette.Object.extend
     # show navbarView
     @layout.headerRegion.show navbarView
 
+  showVerifyPhoneNumber: ->
+    VerifyPhoneNumberModel = require '../models/verify_phone.coffee'
+    verifyPhoneNumberModel = new VerifyPhoneNumberModel()
+
+    VerifyPhoneNumberView = require '../views/verify_phone.coffee'
+    verifyPhoneNumberView = new VerifyPhoneNumberView
+      model: verifyPhoneNumberModel
+
+    @layout.contentRegion.show verifyPhoneNumberView
+
+  showVerifyEmail: ->
+    VerifyEmailView = require '../views/verify_email.coffee'
+    verifyEmailView = new VerifyEmailView()
+
+    @layout.contentRegion.show verifyEmailView
+
   showSignUp: ->
     SignUpModel = require '../models/sign_up.coffee'
     signUpModel = new SignUpModel()
-
-    SignUpViewSucces = require '../views/sign_up_success.coffee'
-    signUpViewSucces = new SignUpViewSucces()
 
     SignUpView = require '../views/sign_up.coffee'
     signUpView = new SignUpView
@@ -45,6 +58,11 @@ module.exports = Marionette.Object.extend
     @layout.contentRegion.show signUpView
 
     signUpView.on 'handle:submit:signup', =>
-      console.log(signUpModel.isValid())
       if signUpModel.isValid()
-        @layout.contentRegion.show signUpViewSucces
+        if Backbone.Validation.patterns.email.test signUpModel.get('id')
+          @showVerifyEmail()
+        else
+          @showVerifyPhoneNumber()
+
+    signUpView.on 'handle:focus:loss:input', (inputName)->
+      @model.isValid(inputName)
