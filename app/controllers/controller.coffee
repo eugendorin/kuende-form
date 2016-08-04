@@ -32,6 +32,7 @@ module.exports = Marionette.Object.extend
     @layout.headerRegion.show navbarView
 
   showVerifyPhoneNumber: ->
+    Backbone.history.navigate('sign_up_phone')
     VerifyPhoneNumberModel = require '../models/verify_phone.coffee'
     verifyPhoneNumberModel = new VerifyPhoneNumberModel()
 
@@ -42,6 +43,8 @@ module.exports = Marionette.Object.extend
     @layout.contentRegion.show verifyPhoneNumberView
 
   showVerifyEmail: ->
+    Backbone.history.navigate('sign_up_email')
+
     VerifyEmailView = require '../views/verify_email.coffee'
     verifyEmailView = new VerifyEmailView()
 

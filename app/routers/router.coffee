@@ -2,7 +2,7 @@ Controller = require '../controllers/controller.coffee'
 
 module.exports = Marionette.AppRouter.extend
   appRoutes:
-    '': 'showSignUp'
-    'verify_phone_number':'showVerifyPhoneNumber'
-
+    '':'showSignUp'
+    'sign_up_email':'showVerifyEmail'
+    'sign_up_phone':'showVerifyPhoneNumber'
   controller: new Controller()
